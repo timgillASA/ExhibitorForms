@@ -1,2 +1,44 @@
 # ExhibitorForms
 CF Code and files allowing input and editing of Exhibitor questions. Also allows insert and editing of Reps for the exhibitor
+
+create an application based on the given table schemas that will allow users to enter and edit the fields from tblSponsors and tblSponsorReps. The two tables are linked by the SponsoriD field. it will also use an application variable called SponsorYear that is set in the application.cfm file and used to filter the tblSponsorReps rep records by the field "SponsorYear". 
+
+It should have a login system that uses a dropdown listing existing of tblSponsors.Organization (in alpha order) and the tblSponsors.email linked to that record to send a 6 digit code to that email. That 6 digit code can then be used to authenticate the login and get the record based on that email and the SponsorID. The form fields will then be prefilled with what is in tblSponsors and tblsponsorReps.  There should be an option to add new tblSponsorReps records linked to tblSponsor and to edit or delete existing tblsponsorReps records. there should not be an option to delete the tblSponsors record.
+
+There should also be an option to upload a "Logo" image file, png or jpg types only. these will be uploaded to a directory that is stored in the variable application.UploadDirectory. The uploaded image should keep the existing filename but append "_#Application.SponsorYear#" to it.
+
+Application.SponsorYear = "2025"
+Application.UploadDirectory = "e:\inetpub\wwwroot\images\CompanyLogos"
+
+tblSponsors schema:
+
+	[SponsorID] [int] IDENTITY(1,1) NOT NULL,
+	[Organization] [varchar](100) NULL,
+	[FirstName] [varchar](50) NULL,
+	[LastName] [varchar](50) NULL,
+	[Address] [varchar](50) NULL,
+	[Address2] [varchar](50) NULL,
+	[City] [varchar](50) NULL,
+	[State] [varchar](50) NULL,
+	[Zip] [varchar](50) NULL,
+	[Country] [varchar](50) NULL,
+	[Email] [varchar](100) NULL,
+	[Email2] [varchar](100) NULL,
+	[Phone] [varchar](50) NULL,
+	[Website] [varchar](250) NULL,
+	[LogoFilename] [varchar](50) NULL,
+	[LinkedInURL] [nvarchar](max) NULL,
+	[FacebookURL] [nvarchar](max) NULL,
+	[Instagram] [nvarchar](100) NULL,
+	[Youtube] [nvarchar](100) NULL
+
+
+tblSponsorReps schema:
+
+	[SponsorID] [int] NOT NULL,
+	[FirstName] [nvarchar](50) NULL,
+	[LastName] [nvarchar](50) NULL,
+	[Email] [nvarchar](100) NULL,
+	[SponsorYear] [int] NULL
+
+ 

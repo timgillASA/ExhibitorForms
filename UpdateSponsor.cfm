@@ -10,7 +10,7 @@
   <cfset filename = ListFirst(form.Logo, "/\")>
   <cfset ext = ListLast(filename, ".")>
   <cfif ext EQ "jpg" OR ext EQ "png">
-    <cfset newName = ListFirst(filename, ".") & "_" & Application.MeetingYear & "." & ext>
+    <cfset newName = ListFirst(filename, ".") & "_" & Application.SponsorYear & "." & ext>
     <cffile action="upload" fileField="Logo" destination="#Application.UploadDirectory#" nameconflict="overwrite" result="upload">
     <cffile action="rename" source="#Application.UploadDirectory#/#upload.ServerFile#" destination="#Application.UploadDirectory#/#newName#">
     <cfquery datasource="#session.dbsource#">

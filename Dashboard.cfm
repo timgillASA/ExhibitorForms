@@ -1,3 +1,4 @@
+<cfparam name="session.loggedIn" default="false">
 <cfif NOT session.loggedIn>
   <cflocation url="login.cfm">
 </cfif>
@@ -9,7 +10,7 @@
 <cfquery name="reps" datasource="#session.dbsource#">
   SELECT * FROM tblSponsorReps
   WHERE SponsorID = <cfqueryparam value="#session.SponsorID#" cfsqltype="cf_sql_integer">
-    AND MeetingYear = <cfqueryparam value="#Application.MeetingYear#" cfsqltype="cf_sql_integer">
+    AND SponsorYear = <cfqueryparam value="#Application.SponsorYear#" cfsqltype="cf_sql_integer">
 </cfquery>
 
 <!-- Prefilled sponsor form -->

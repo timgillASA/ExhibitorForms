@@ -13,6 +13,7 @@ component {
         application.LoginAttempts = structNew();
         application.varBearerToken = "";
         application.varNewTokenTime = "";
+        application.SponsorYear = "2025"; // Add SponsorYear as specified in schema
         return true;
     }
     
@@ -24,6 +25,7 @@ component {
         session.MeetingCode = session.MeetingAcronym & session.MeetingYear;
         session.Meeting = session.MeetingAcronym & " " & session.MeetingYear;
         session.dbsource = session.MeetingAcronym & session.MeetingYear & "AbsDEMO";
+        session.loggedIn = false; // Initialize login status
         
         // Load meeting information from database
         var qryMeetingInfo = queryExecute(

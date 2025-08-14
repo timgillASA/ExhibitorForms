@@ -1,4 +1,4 @@
-<cfquery name="getSponsors" datasource="your_dsn">
+<cfquery name="getSponsors" datasource="#session.dbsource#">
   SELECT SponsorID, Organization, Email
   FROM tblSponsors
   ORDER BY Organization

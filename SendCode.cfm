@@ -1,5 +1,5 @@
 <cfparam name="form.SponsorID" default="">
-<cfquery name="getSponsor" datasource="your_dsn">
+<cfquery name="getSponsor" datasource="#session.dbsource#">
   SELECT Email FROM tblSponsors WHERE SponsorID = <cfqueryparam value="#form.SponsorID#" cfsqltype="cf_sql_integer">
 </cfquery>
 <cfset code = NumberFormat(RandRange(100000,999999), "000000")>

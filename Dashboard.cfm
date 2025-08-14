@@ -2,11 +2,11 @@
   <cflocation url="login.cfm">
 </cfif>
 
-<cfquery name="sponsor" datasource="your_dsn">
+<cfquery name="sponsor" datasource="#session.dbsource#">
   SELECT * FROM tblSponsors WHERE SponsorID = <cfqueryparam value="#session.SponsorID#" cfsqltype="cf_sql_integer">
 </cfquery>
 
-<cfquery name="reps" datasource="your_dsn">
+<cfquery name="reps" datasource="#session.dbsource#">
   SELECT * FROM tblSponsorReps
   WHERE SponsorID = <cfqueryparam value="#session.SponsorID#" cfsqltype="cf_sql_integer">
     AND MeetingYear = <cfqueryparam value="#Application.MeetingYear#" cfsqltype="cf_sql_integer">

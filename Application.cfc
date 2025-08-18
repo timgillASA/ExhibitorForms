@@ -27,14 +27,7 @@ component {
         session.dbsource = "JSMSponsors";
         session.loggedIn = false; // Initialize login status
         
-        // Load meeting information from database
-        var qryMeetingInfo = queryExecute(
-            "select tblConstants.* from tblConstants",
-            {},
-            {datasource = session.dbsource}
-        );
-        
-        // You may want to set additional session variables based on qryMeetingInfo here
+
     }
     
     // onRequestStart method runs at the beginning of each request

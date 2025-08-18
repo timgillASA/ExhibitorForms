@@ -1,6 +1,6 @@
 <cfparam name="session.loggedIn" default="false">
 <cfif NOT session.loggedIn>
-  <cflocation url="login.cfm">
+  <cflocation url="login.cfm" addtoken="false">
 </cfif>
 
 <cfquery name="sponsor" datasource="#session.dbsource#">

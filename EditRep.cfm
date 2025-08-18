@@ -25,4 +25,4 @@
     )
   </cfquery>
 </cfif>
-<cflocation url="dashboard.cfm">
+<cflocation url="dashboard.cfm" addtoken="false">

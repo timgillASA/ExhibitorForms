@@ -47,13 +47,13 @@ component {
         }
         
         // Token handling
-        if (structKeyExists(url, "reset") || now() GT application.varNewTokenTime) {
-            application.varBearerToken = "";
-        }
+        //if (structKeyExists(url, "reset") || now() GT application.varNewTokenTime) {
+        //    application.varBearerToken = "";
+        //}
         
-        if (application.varBearerToken is "") {
-            getNewToken();
-        }
+        //if (application.varBearerToken is "") {
+        //    getNewToken();
+        //}
         
         return true;
     }

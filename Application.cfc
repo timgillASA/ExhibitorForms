@@ -11,8 +11,6 @@ component {
     // onApplicationStart method runs when application first starts
     public boolean function onApplicationStart() {
         application.LoginAttempts = structNew();
-        application.varBearerToken = "";
-        application.varNewTokenTime = "";
         application.SponsorYear = "2025"; // Add SponsorYear as specified in schema
         url.ShowErrors = "";
         return true;
@@ -39,18 +37,35 @@ component {
             this.enableRobustException = true;
         }
         
-        // Reset functionality
-        if (structKeyExists(url, "reset")) {
-            structClear(session);
-            // Re-establish session variables after clearing
-            reestablishSessionVariables();
+        // Application reset functionality - must come BEFORE session reset
+        if (structKeyExists(url, "resetApp")) {
+            writeOutput("<h3>DEBUG: Application Reset Triggered</h3>");
+            writeOutput("<p>Time: " & now() & "</p>");
+            writeOutput("<p>Calling applicationStop()...</p>");
+            try {
+                applicationStop();
+                writeOutput("<p>applicationStop() completed successfully</p>");
+                // Small delay to ensure application stops
+                sleep(100);
+                writeOutput("<p>Sleep completed, redirecting...</p>");
+            } catch (any e) {
+                writeOutput("<p>ERROR in applicationStop(): " & e.message & "</p>");
+                // If applicationStop fails, continue anyway
+            }
             location(url="index.cfm", addToken="no");
             return false;
         }
         
-        // Application reset functionality
-        if (structKeyExists(url, "resetApp")) {
-            applicationStop();
+        // Reset functionality
+        if (structKeyExists(url, "reset")) {
+            writeOutput("<h3>DEBUG: Session Reset Triggered</h3>");
+            writeOutput("<p>Time: " & now() & "</p>");
+            writeOutput("<p>Clearing session...</p>");
+            structClear(session);
+            writeOutput("<p>Re-establishing session variables...</p>");
+            // Re-establish session variables after clearing
+            reestablishSessionVariables();
+            writeOutput("<p>Session reset completed, redirecting...</p>");
             location(url="index.cfm", addToken="no");
             return false;
         }

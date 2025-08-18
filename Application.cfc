@@ -42,6 +42,8 @@ component {
         // Reset functionality
         if (structKeyExists(url, "reset")) {
             structClear(session);
+            // Re-establish session variables after clearing
+            reestablishSessionVariables();
             location(url="index.cfm", addToken="no");
             return false;
         }
@@ -56,6 +58,24 @@ component {
         //}
         
         return true;
+    }
+    
+    // Helper function to reestablish session variables
+    private void function reestablishSessionVariables() {
+        session.MeetingYear = "2025";
+        session.MeetingAcronym = "JSM";
+        session.ParentEvent = "2e04bc98-0078-c684-cbd1-0b48009516cd";
+        session.MeetingCode = session.MeetingAcronym & session.MeetingYear;
+        session.Meeting = session.MeetingAcronym & " " & session.MeetingYear;
+        session.dbsource = "JSMSponsors";
+        session.loggedIn = false; // Initialize login status
+        
+        // Load meeting information from database
+        var qryMeetingInfo = queryExecute(
+            "select tblConstants.* from tblConstants",
+            {},
+            {datasource = session.dbsource}
+        );
     }
     
     // Replace the ms_token custom tag functionality

@@ -46,6 +46,12 @@ component {
             return false;
         }
         
+        // Redirect to Dashboard.cfm as the default page
+        if (listLast(arguments.targetPage, "/\") == "index.cfm" || arguments.targetPage == "") {
+            location(url="dashboard.cfm", addToken="no");
+            return false;
+        }
+        
         // Token handling
         //if (structKeyExists(url, "reset") || now() GT application.varNewTokenTime) {
         //    application.varBearerToken = "";

@@ -14,6 +14,7 @@ component {
         application.varBearerToken = "";
         application.varNewTokenTime = "";
         application.SponsorYear = "2025"; // Add SponsorYear as specified in schema
+        url.ShowErrors = "";
         return true;
     }
     
@@ -32,6 +33,12 @@ component {
     
     // onRequestStart method runs at the beginning of each request
     public boolean function onRequestStart(required string targetPage) {
+        // DEBUG: Show detailed errors when url.ShowErrors is present
+        // Comment out the next 3 lines when not debugging
+        if (structKeyExists(url, "ShowErrors")) {
+            this.enableRobustException = true;
+        }
+        
         // Reset functionality
         if (structKeyExists(url, "reset")) {
             structClear(session);
@@ -60,10 +67,8 @@ component {
         session.ParentEvent = "2e04bc98-0078-c684-cbd1-0b48009516cd";
         session.MeetingCode = session.MeetingAcronym & session.MeetingYear;
         session.Meeting = session.MeetingAcronym & " " & session.MeetingYear;
-        session.dbsource = "JSMSponsors";
+        session.dbsource = "JSMSponsorsDEMO";
         session.loggedIn = false; // Initialize login status
-        
-
     }
     
     // Replace the ms_token custom tag functionality

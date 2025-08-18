@@ -123,6 +123,11 @@
       <a href="mailto:amy@amstat.org">amy@amstat.org</a><br>
       (703) 684-1221</p>
       
+      <cfif isDefined("session.loggedIn") AND session.loggedIn>
+        <p><strong>Session:</strong><br>
+        <a href="logout.cfm" style="color: #dc3545;"><i class="fa fa-sign-out"></i> Logout</a></p>
+      </cfif>
+      
       <h4>Instructions</h4>
       <ul style="margin-left: 15px;">
         <li>Update your main contact information in the form</li>

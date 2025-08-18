@@ -59,8 +59,8 @@ component {
     }
     
     // Replace the ms_token custom tag functionality
-    private void function getNewToken() {
+    //private void function getNewToken() {
         // Call the MS_Token.cfm custom tag
-        cfmodule(template="MS_Token.cfm");
-    }
+    //    cfmodule(template="MS_Token.cfm");
+    //}
 }

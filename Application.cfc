@@ -48,6 +48,13 @@ component {
             return false;
         }
         
+        // Application reset functionality
+        if (structKeyExists(url, "resetApp")) {
+            applicationStop();
+            location(url="index.cfm", addToken="no");
+            return false;
+        }
+        
         // Token handling
         //if (structKeyExists(url, "reset") || now() GT application.varNewTokenTime) {
         //    application.varBearerToken = "";

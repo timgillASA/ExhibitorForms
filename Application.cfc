@@ -63,12 +63,7 @@ component {
         session.dbsource = "JSMSponsors";
         session.loggedIn = false; // Initialize login status
         
-        // Load meeting information from database
-        var qryMeetingInfo = queryExecute(
-            "select tblConstants.* from tblConstants",
-            {},
-            {datasource = session.dbsource}
-        );
+
     }
     
     // Replace the ms_token custom tag functionality

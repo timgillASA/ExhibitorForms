@@ -24,7 +24,7 @@ component {
         session.ParentEvent = "2e04bc98-0078-c684-cbd1-0b48009516cd";
         session.MeetingCode = session.MeetingAcronym & session.MeetingYear;
         session.Meeting = session.MeetingAcronym & " " & session.MeetingYear;
-        session.dbsource = session.MeetingAcronym & session.MeetingYear & "AbsDEMO";
+        session.dbsource = "JSMSponsors";
         session.loggedIn = false; // Initialize login status
         
         // Load meeting information from database

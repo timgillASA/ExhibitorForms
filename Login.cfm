@@ -1,5 +1,5 @@
 <cfquery name="getSponsors" datasource="#session.dbsource#">
-  SELECT SponsorID, Organization, Email
+  SELECT SponsorID, Organization
   FROM tblSponsors
   ORDER BY Organization
 </cfquery>

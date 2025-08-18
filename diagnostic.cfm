@@ -1,4 +1,4 @@
-<cfquery name="getTableInfo" datasource="#session.dbsource#">
+<cfquery name="getTableInfo" datasource="#application.dbsource#">
   SELECT COLUMN_NAME, DATA_TYPE 
   FROM INFORMATION_SCHEMA.COLUMNS 
   WHERE TABLE_NAME = 'tblSponsors'
@@ -14,7 +14,7 @@
 
 <h3>Sample data from tblSponsors (first record):</h3>
 <cftry>
-  <cfquery name="sampleData" datasource="#session.dbsource#" maxrows="1">
+  <cfquery name="sampleData" datasource="#application.dbsource#" maxrows="1">
     SELECT TOP 1 * FROM tblSponsors
   </cfquery>
   

@@ -37,3 +37,17 @@ tblSponsorReps schema:
 	[LastName] [nvarchar](50) NULL,
 	[Email] [nvarchar](100) NULL,
 	[SponsorYear] [int] NULL
+
+tblMeetings schema:
+
+	[MeetingID] [int] IDENTITY(100,1) NOT NULL,
+	[MeetingAcronym] [nvarchar](50) NULL,
+	[MeetingYear] [int] NULL,
+	[MeetingTitle] [varchar](200) NULL,
+	[MeetingStartDate] [smalldatetime] NULL,
+	[MeetingEndDate] [smalldatetime] NULL,
+	[MeetingFRRDeadline] [smalldatetime] NULL,
+	[MeetingLocation] [varchar](200) NULL,
+	[MeetingURL] [varchar](150) NULL,
+	[MeetingCSS] [nvarchar](max) NULL,
+	[Timestamp] [timestamp] NOT NULL

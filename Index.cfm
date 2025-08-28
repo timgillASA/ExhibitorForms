@@ -1,9 +1,9 @@
-
 <cfset pageTitle = "Dashboard - Exhibitor Forms">
 <cfinclude template="header.cfm">
 
 <cfparam name="session.loggedIn" default="false">
-<cfif NOT session.loggedIn>
+<cfparam name="session.SponsorID" default="">
+<cfif NOT session.loggedIn OR NOT len(session.SponsorID)>
   <cflocation url="login.cfm" addtoken="false">
 </cfif>
 
@@ -24,54 +24,47 @@
     
     <!-- Prefilled sponsor form -->
     <div class="sponsor-form-container">
-      <cfform action="updateSponsor.cfm" method="post" enctype="multipart/form-data">
-        <cfoutput>
-          <h3>Main Contact Information</h3>
-      
-      <div class="form-field">
-        <label for="FirstName">First Name:</label>
-        <cfinput name="FirstName" value="#sponsor.FirstName#" maxlength="50" required="no">
-      </div>
-      
-      <div class="form-field">
-        <label for="LastName">Last Name:</label>
-        <cfinput name="LastName" value="#sponsor.LastName#" maxlength="50" required="no">
-      </div>
-      
-      <div class="form-field">
-        <label for="Email">Email Address:</label>
-        <cfinput name="Email" value="#sponsor.Email#" maxlength="100" required="no" type="email">
-      </div>
-      
-      <div class="form-field">
-        <label for="Logo">Upload New Logo:</label>
-        <cfinput type="file" name="Logo">
-      </div>
-      
-      <!-- Logo Preview -->
-      <cfif len(trim(sponsor.LogoFilename))>
-        <div class="logo-preview-container">
-          <strong>Current Logo:</strong><br>
-          <img src="/images/CompanyLogos/#sponsor.LogoFilename#" 
-               alt="Company Logo" 
-               style="max-width: 200px; max-height: 150px; border: 1px solid ##ccc; margin-top: 5px;"
-               onerror="this.style.display='none'; document.getElementById('logoError').style.display='block';">
-          <div id="logoError" style="display: none; color: red; font-size: 12px; margin-top: 5px;">
-            Logo file not found: #sponsor.LogoFilename#
-          </div>
+      <cfoutput>
+      <form action="updateSponsor.cfm" method="post" enctype="multipart/form-data">
+        <h3>Main Contact Information</h3>
+        <div class="form-field">
+          <label for="FirstName">First Name:</label>
+          <input name="FirstName" value="#sponsor.FirstName#" maxlength="50" required>
         </div>
-      </cfif>
-      
-      <div class="submit-container">
-        <input type="submit" value="Update Contact Information">
-      </div>
-    </cfoutput>
-  </cfform>
-</div>
+        <div class="form-field">
+          <label for="LastName">Last Name:</label>
+          <input name="LastName" value="#sponsor.LastName#" maxlength="50" required>
+        </div>
+        <div class="form-field">
+          <label for="Email">Email Address:</label>
+          <input name="Email" value="#sponsor.Email#" maxlength="100" required type="email">
+        </div>
+        <div class="form-field">
+          <label for="Logo">Upload New Logo:</label>
+          <input type="file" name="Logo" accept=".jpg,.png">
+        </div>
+        <!-- Logo Preview -->
+        <cfif len(trim(sponsor.LogoFilename))>
+          <div class="logo-preview-container">
+            <strong>Current Logo:</strong> #sponsor.LogoFilename#<br>
+            <img src="/images/CompanyLogos/#sponsor.LogoFilename#" 
+                 alt="Company Logo" 
+                 style="max-width: 200px; max-height: 150px; border: 1px solid ##ccc; margin-top: 5px;"
+                 onerror="this.style.display='none'; document.getElementById('logoError').style.display='block';">
+            <div id="logoError" style="display: none; color: red; font-size: 12px; margin-top: 5px;">
+              Logo file not found: #sponsor.LogoFilename#
+            </div>
+          </div>
+        </cfif>
+        <div class="submit-container">
+          <input type="submit" value="Update Contact Information">
+        </div>
+      </form>
+      </cfoutput>
+    </div>
 
 <!-- Representatives Section -->
 <div class="sponsor-form-container">
-  <cfoutput>
     <div class="reps-container">
       <h3>Representatives</h3>
     
@@ -85,6 +78,7 @@
     
     <!-- Existing Reps -->
     <cfloop query="reps">
+      <cfoutput>
       <form action="editRep.cfm" method="post">
         <input type="hidden" name="RepID" value="#CurrentRow#">
         <div class="rep-row">
@@ -97,6 +91,7 @@
           </div>
         </div>
       </form>
+      </cfoutput>
     </cfloop>
     
     <!-- Add New Rep Form -->
@@ -110,7 +105,6 @@
       </div>
     </form>
   </div>
-</cfoutput>
 </div> <!-- End Representatives Section Container -->
 
   </div> <!-- End main content column -->

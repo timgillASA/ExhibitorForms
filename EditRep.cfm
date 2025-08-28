@@ -1,10 +1,18 @@
 <cfset pageTitle = "Edit Representative - Exhibitor Forms">
 <cfinclude template="header.cfm">
 
+<!-- Security check -->
+<cfparam name="session.loggedIn" default="false">
+<cfparam name="session.SponsorID" default="">
+<cfif NOT session.loggedIn OR NOT len(session.SponsorID)>
+  <cflocation url="login.cfm" addtoken="false">
+</cfif>
+
 <!-- Server-side field length validation for reps -->
 <cfparam name="form.FirstName" default="">
 <cfparam name="form.LastName" default="">
 <cfparam name="form.Email" default="">
+<cfparam name="form.action" default="">
 
 <!-- Trim and enforce maximum lengths -->
 <cfset form.FirstName = left(trim(form.FirstName), 50)>

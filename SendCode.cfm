@@ -2,9 +2,20 @@
 <cfinclude template="header.cfm">
 
 <cfparam name="form.SponsorID" default="">
+
+<!-- Validate SponsorID -->
+<cfif NOT len(form.SponsorID) OR NOT isNumeric(form.SponsorID)>
+  <cflocation url="login.cfm?error=invalidSponsor" addtoken="false">
+</cfif>
+
 <cfquery name="getSponsor" datasource="#application.dbsource#">
   SELECT Email FROM tblSponsors WHERE SponsorID = <cfqueryparam value="#form.SponsorID#" cfsqltype="cf_sql_integer">
 </cfquery>
+
+<!-- Check if sponsor exists -->
+<cfif getSponsor.recordCount EQ 0>
+  <cflocation url="login.cfm?error=sponsorNotFound" addtoken="false">
+</cfif>
 <cfset code = NumberFormat(RandRange(100000,999999), "000000")>
 <cfset session.AuthCode = code>
 <cfset session.AuthCodeTimestamp = now()> <!-- Store when code was generated -->

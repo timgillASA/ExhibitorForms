@@ -7,6 +7,18 @@
       <h2>Exhibitor / Sponsor Login</h2>
       <p>Select your organization to receive a verification code via email.</p>
       
+      <!-- Display error messages -->
+      <cfif isDefined("url.error")>
+        <div class="error-message">
+          <i class="fa fa-exclamation-triangle"></i>
+          <cfswitch expression="#url.error#">
+            <cfcase value="invalidSponsor">Invalid organization selection. Please try again.</cfcase>
+            <cfcase value="sponsorNotFound">Organization not found. Please contact support.</cfcase>
+            <cfdefaultcase>An error occurred. Please try again.</cfdefaultcase>
+          </cfswitch>
+        </div>
+      </cfif>
+      
       <cfquery name="getSponsors" datasource="#application.dbsource#">
         SELECT SponsorID, Organization, Email
         FROM tblSponsors

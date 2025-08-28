@@ -1,9 +1,14 @@
 <cfset pageTitle = "Verify Code - Exhibitor Forms">
 <cfinclude template="header.cfm">
 
+<!-- Parameter validation -->
+<cfparam name="form.code" default="">
+<cfparam name="session.AuthCode" default="">
+<cfparam name="session.AuthCodeTimestamp" default="">
+
 <!-- Check if the code has expired (5 minutes = 300 seconds) -->
 <cfset codeExpired = false>
-<cfif isDefined("session.AuthCodeTimestamp")>
+<cfif isDefined("session.AuthCodeTimestamp") AND isDate(session.AuthCodeTimestamp)>
   <cfset minutesElapsed = dateDiff("n", session.AuthCodeTimestamp, now())>
   <cfif minutesElapsed GT 5>
     <cfset codeExpired = true>

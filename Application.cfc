@@ -19,10 +19,10 @@ component {
         application.ParentEvent = "2e04bc98-0078-c684-cbd1-0b48009516cd";
         application.Meeting = application.MeetingAcronym & " " & application.SponsorYear;
         application.dbsource = "JSMSponsorsDEMO";
+        application.UploadDirectory = "e:\inetpub\wwwroot\images\CompanyLogos";
         
         // Email configuration
         application.EmailFrom = "noreply@amstat.org"; // Change this to your desired from address
-        application.EmailSubject = "JSM 2025 Sponsors/Exhibitors Login Code"; // Will be dynamically built in SendCode.cfm
         
         url.ShowErrors = "";
         return true;
